@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { FormsModule } from '@angular/forms'; 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatInputModule,
@@ -15,6 +15,7 @@ import {
 import { AppComponent } from './app.component';
 import { EditComponent } from './edit/edit.component';
 import { PreviewComponent } from './preview/preview.component';
+import { AppService } from './app.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { PreviewComponent } from './preview/preview.component';
     PreviewComponent
   ],
   imports: [
-    BrowserModule, BrowserAnimationsModule,
+    BrowserModule, BrowserAnimationsModule, FormsModule,
     MatInputModule,
     MatSelectModule,
     MatCardModule,
@@ -41,7 +42,7 @@ import { PreviewComponent } from './preview/preview.component';
     MatListModule,
     MatDividerModule
   ],
-  providers: [],
+  providers: [AppService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
