@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Transformer } from '../models/transformer.class';
 
 @Component({
   selector: 'app-preview',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./preview.component.css']
 })
 export class PreviewComponent implements OnInit {
+
+  transformers: Transformer[];
 
   constructor() { }
 

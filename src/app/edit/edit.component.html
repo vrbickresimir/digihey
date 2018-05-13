@@ -1,3 +1,42 @@
-<p>
-  edit works!
-</p>
+<mat-card style="width: 400px;height: 400px;">
+  <mat-card-header>
+    <mat-card-title>
+      Edit component
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form>
+      <mat-grid-list cols="2" rowHeight="2:1">
+        <mat-grid-tile>
+          <mat-form-field>
+            <input matInput placeholder="Name">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field>
+            <input matInput placeholder="Status">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-select placeholder="Vehicle group">
+            <mat-option value="option1">Option 1</mat-option>
+            <mat-option value="option2">Option 2</mat-option>
+            <mat-option value="option3">Option 3</mat-option>
+          </mat-select>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          0
+        </mat-grid-tile>
+        <mat-grid-tile>
+          1
+        </mat-grid-tile>
+      </mat-grid-list>
+
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary">Add</button>
+    <button mat-raised-button color="accent">Edit</button>
+    <button mat-raised-button color="warn">Delete</button>
+  </mat-card-actions>
+</mat-card>
