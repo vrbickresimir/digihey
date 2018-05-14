@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatInputModule,
@@ -16,15 +16,17 @@ import { AppComponent } from './app.component';
 import { EditComponent } from './edit/edit.component';
 import { PreviewComponent } from './preview/preview.component';
 import { AppService } from './app.service';
+import { TransformerComponent } from './transformer/transformer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EditComponent,
-    PreviewComponent
+    PreviewComponent,
+    TransformerComponent
   ],
   imports: [
-    BrowserModule, BrowserAnimationsModule, FormsModule,
+    BrowserModule, BrowserAnimationsModule, FormsModule, ReactiveFormsModule,
     MatInputModule,
     MatSelectModule,
     MatCardModule,
