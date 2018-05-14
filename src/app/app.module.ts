@@ -17,6 +17,8 @@ import { EditComponent } from './edit/edit.component';
 import { PreviewComponent } from './preview/preview.component';
 import { AppService } from './app.service';
 import { TransformerComponent } from './transformer/transformer.component';
+import { RouterModule } from '@angular/router';
+import { routes } from './app.routes';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,7 @@ import { TransformerComponent } from './transformer/transformer.component';
     TransformerComponent
   ],
   imports: [
-    BrowserModule, BrowserAnimationsModule, FormsModule, ReactiveFormsModule,
+    BrowserModule, BrowserAnimationsModule, FormsModule, ReactiveFormsModule, RouterModule.forRoot(routes),
     MatInputModule,
     MatSelectModule,
     MatCardModule,
