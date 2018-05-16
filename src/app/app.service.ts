@@ -1,20 +1,37 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 
 import { Transformer } from './models/transformer.class';
-import { DATA } from './data';
 
 @Injectable()
 export class AppService {
-  selectedItem: Subject<number> = new Subject<number>();
 
+  selectedItem: Subject<Transformer> = new BehaviorSubject<Transformer>(null);
 
-  constructor() { }
+  private TRANSFORMERS_URL = 'http://localhost:3000/transformers';
+  private FACTIONS_URL = 'http://localhost:3000/factions';
+  private OPTIONS_URL = 'http://localhost:3000/vehicleTypes';
+
+  constructor(private httpClient: HttpClient) { }
 
   getTransformers(): any{
-    return Observable.of(DATA);
+    return this.httpClient.get(this.TRANSFORMERS_URL);
+    // return Observable.of(DATA);
+  }
+
+  getTransformer(index: number) {
+    // return Observable.of(DATA[index]);
+  }
+
+  getFactions(){
+    return this.httpClient.get(this.FACTIONS_URL);
+  }
+
+  getOptions() {
+    return this.httpClient.get(this.OPTIONS_URL);
   }
 
 }
