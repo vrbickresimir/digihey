@@ -1,15 +1,14 @@
-  <mat-card style="width: 400px;height: 400px;">
-    <mat-card-header>
+<mat-card>
+  <mat-card-header>
     <mat-card-title>
-        Preview component
+      <h2>Preview component</h2>
     </mat-card-title>
   </mat-card-header>
-    <mat-card-content>
-      <mat-list>
-        <mat-list-item>
-            <h4 mat-line> name </h4>
-            <p mat-line> status </p>
-        </mat-list-item>
-      </mat-list>
+  <mat-card-content>
+    <div class="row">
+      <div class="col-md m-1" *ngFor="let transformer of transformers; let i = index">
+        <app-transformer [transformer]="transformer" (click)="onSelect(transformer, i)"></app-transformer>
+      </div>
+    </div>
   </mat-card-content>
-  </mat-card>
+</mat-card>
