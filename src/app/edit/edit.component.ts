@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 
 import { AppService } from '../app.service';
 import { Transformer } from '../models/transformer.class';
+import { VehicleTypes } from '../models/vehicleTypes.class';
 
 @Component({
   selector: 'app-edit',
@@ -13,14 +14,29 @@ import { Transformer } from '../models/transformer.class';
 export class EditComponent implements OnInit {
 
   transformerForm: FormGroup;
+  optionsArray: VehicleTypes[] = [];
+  groupOptions = [];
+  typeOptions = [];
+  modelOptions = [];
 
   constructor(private route: ActivatedRoute, public appService: AppService) { }
 
   ngOnInit() {
     let id = this.route.snapshot.params['id'];
     id ? this.updateForm(id) : this.initForm();
+    this.createUniqueSets();
   }
 
+  initForm() {
+    this.transformerForm = new FormGroup({
+      'name': new FormControl('', Validators.required),
+      'status': new FormControl('', Validators.required),
+      'vehicleGroup': new FormControl('', Validators.required),
+      'vehicleType': new FormControl('', Validators.required),
+      'vehicleModel': new FormControl('', Validators.required),
+      'gears': new FormArray([new FormControl()])
+    });
+  }
 
   updateForm(index: number) {
     let gears = new FormArray([]);
@@ -42,26 +58,60 @@ export class EditComponent implements OnInit {
     })
   }
 
-  initForm() {
-    this.transformerForm = new FormGroup({
-      'name': new FormControl('', Validators.required),
-      'status': new FormControl('', Validators.required),
-      'vehicleGroup': new FormControl('', Validators.required),
-      'vehicleType': new FormControl('', Validators.required),
-      'vehicleModel': new FormControl('', Validators.required),
-      'gears': new FormArray([new FormControl()])
-    });
-  }
-
-  onSubmit() {
-    console.log('data: ', this.transformerForm);
-    console.log((<FormArray>this.transformerForm.get('gears')).controls);
-  }
-
   addNewGear() {
     (<FormArray>this.transformerForm.get('gears')).push(
       new FormControl()
     );
   }
 
+  createUniqueSets() {
+    let group = [];
+    let type = [];
+    let model = [];
+
+    this.appService.getOptions().subscribe(options => {
+
+      this.optionsArray = options;
+
+      options.forEach(option => {
+        group.push(option.group);
+        type.push(option.type);
+        model.push(option.model);
+      })
+
+      this.groupOptions = Array.from(new Set(group));
+      this.typeOptions = Array.from(new Set(type));
+      this.modelOptions = Array.from(new Set(model));
+    })
+  }
+
+  updateTypeOptions(option: string) {
+    let selectObj = []
+    let type = [];
+
+    selectObj = this.optionsArray.filter(opt =>
+      opt['group'] == option
+    );
+    selectObj.forEach(obj => {
+      type.push(obj.type);
+    });
+    this.typeOptions = Array.from(new Set(type));
+  }
+
+  updateModelOptions(option: string) {
+    let selectObj = []
+    let model = [];
+
+    selectObj = this.optionsArray.filter(opt =>
+      opt['type'] == option
+    );
+    selectObj.forEach(obj => {
+      model.push(obj.model);
+    });
+    this.modelOptions = Array.from(new Set(model));
+  }
+
+  onSubmit() {
+    console.log('data: ', this.transformerForm);
+  }
 }

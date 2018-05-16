@@ -22,18 +22,17 @@
         <div class="row p-2">
           <div class="col-sm-4 p-1">
             <mat-select placeholder="Vehicle group" formControlName="vehicleGroup">
-              <mat-option value="option1">Air</mat-option>
-              <mat-option value="option1">Air</mat-option>
+              <mat-option *ngFor="let option of groupOptions" [value]="option" (click)="updateTypeOptions(option)">{{option}}</mat-option>
             </mat-select>
           </div>
           <div class="col-sm-4 p-1">
             <mat-select placeholder="Vehicle type" formControlName="vehicleType">
-              <mat-option value="option1">Boat</mat-option>
+                <mat-option *ngFor="let option of typeOptions" [value]="option" (click)="updateModelOptions(option)">{{option}}</mat-option>
             </mat-select>
           </div>
           <div class="col-sm-4 p-1">
             <mat-select placeholder="Vehicle type" formControlName="vehicleModel">
-              <mat-option value="option1">Camaro</mat-option>
+                <mat-option *ngFor="let option of modelOptions" [value]="option">{{option}}</mat-option>
             </mat-select>
           </div>
         </div>

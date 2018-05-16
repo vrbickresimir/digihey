@@ -5,6 +5,7 @@ import 'rxjs/add/observable/of';
 import { Subject, BehaviorSubject } from 'rxjs';
 
 import { Transformer } from './models/transformer.class';
+import { VehicleTypes } from './models/vehicleTypes.class';
 
 @Injectable()
 export class AppService {
@@ -18,7 +19,7 @@ export class AppService {
   constructor(private httpClient: HttpClient) { }
 
   getTransformers(): any{
-    return this.httpClient.get(this.TRANSFORMERS_URL);
+    return this.httpClient.get<Transformer[]>(this.TRANSFORMERS_URL);
     // return Observable.of(DATA);
   }
 
@@ -31,7 +32,7 @@ export class AppService {
   }
 
   getOptions() {
-    return this.httpClient.get(this.OPTIONS_URL);
+    return this.httpClient.get<VehicleTypes[]>(this.OPTIONS_URL);
   }
 
 }
