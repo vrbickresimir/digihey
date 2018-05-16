@@ -1,4 +1,4 @@
-export class vehicleTypes {
+export class VehicleTypes {
 
     group: string;
     type: string;
