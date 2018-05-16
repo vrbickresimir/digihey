@@ -2,6 +2,7 @@ import { Vehicle } from "./vehicle.interface";
 
 export class Transformer {
 
+    id: number;
     name: string;
     vehicleGroup: string;
     vehicleType: string;
@@ -9,8 +10,9 @@ export class Transformer {
     gear?: string[];
     status: string;
 
-    constructor(name: string, vehicle: Vehicle, status: string, gear?: string[]) {
+    constructor(id: number, name: string, vehicle: Vehicle, status: string, gear?: string[]) {
         
+        this.id = id;
         this.name = name;
         this.vehicleGroup = vehicle.vehicleGroup;
         this.vehicleType = vehicle.vehicleType;
