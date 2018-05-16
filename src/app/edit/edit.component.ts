@@ -64,6 +64,11 @@ export class EditComponent implements OnInit {
     );
   }
 
+  get gearControls() {
+    return (<FormArray>this.transformerForm.get('gears')).controls;
+    // this.transformerForm.get('gears').controls
+  }
+
   createUniqueSets() {
     let group = [];
     let type = [];

@@ -39,7 +39,7 @@
         <div class="row">
           <div class="col-sm-12" formArrayName="gears">
               <div class="row p-2"
-              *ngFor="let gear of this.transformerForm.get('gears').controls; let i = index;">
+              *ngFor="let gear of gearControls; let i = index;">
                   <div class="col-sm-8">
                       <mat-form-field>
                           <input matInput placeholder="Gear" [formControlName]="i">
