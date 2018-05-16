@@ -1,42 +1,66 @@
-<mat-card style="width: 400px;height: 400px;">
+<mat-card>
   <mat-card-header>
     <mat-card-title>
       Edit component
     </mat-card-title>
   </mat-card-header>
-  <mat-card-content>
-    <form>
-      <mat-grid-list cols="2" rowHeight="2:1">
-        <mat-grid-tile>
-          <mat-form-field>
-            <input matInput placeholder="Name">
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile>
-          <mat-form-field>
-            <input matInput placeholder="Status">
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile>
-          <mat-select placeholder="Vehicle group">
-            <mat-option value="option1">Option 1</mat-option>
-            <mat-option value="option2">Option 2</mat-option>
-            <mat-option value="option3">Option 3</mat-option>
-          </mat-select>
-        </mat-grid-tile>
-        <mat-grid-tile>
-          0
-        </mat-grid-tile>
-        <mat-grid-tile>
-          1
-        </mat-grid-tile>
-      </mat-grid-list>
+  <form [formGroup]="transformerForm" (ngSubmit)="onSubmit()">
+    <mat-card-content>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 p-1">
+            <mat-form-field>
+              <input matInput placeholder="Name" formControlName="name">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6 p-1">
+            <mat-form-field>
+              <input matInput placeholder="Status" formControlName="status">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row p-2">
+          <div class="col-sm-4 p-1">
+            <mat-select placeholder="Vehicle group" formControlName="vehicleGroup">
+              <mat-option value="option1">Air</mat-option>
+              <mat-option value="option1">Air</mat-option>
+            </mat-select>
+          </div>
+          <div class="col-sm-4 p-1">
+            <mat-select placeholder="Vehicle type" formControlName="vehicleType">
+              <mat-option value="option1">Boat</mat-option>
+            </mat-select>
+          </div>
+          <div class="col-sm-4 p-1">
+            <mat-select placeholder="Vehicle type" formControlName="vehicleModel">
+              <mat-option value="option1">Camaro</mat-option>
+            </mat-select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12" formArrayName="gears">
+              <div class="row p-2"
+              *ngFor="let gear of this.transformerForm.get('gears').controls; let i = index;">
+                  <div class="col-sm-8">
+                      <mat-form-field>
+                          <input matInput placeholder="Gear" [formControlName]="i">
+                      </mat-form-field>
+                  </div>
+                </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+              <button mat-raised-button color="primary" type="button" (click)="addNewGear()">Add new gear</button>
+          </div>
+        </div>
 
-    </form>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button color="primary">Add</button>
-    <button mat-raised-button color="accent">Edit</button>
-    <button mat-raised-button color="warn">Delete</button>
-  </mat-card-actions>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">Add</button>
+      <button mat-raised-button color="accent" type="button">Clear</button>
+      <button mat-raised-button color="warn" type="button">Delete</button>
+    </mat-card-actions>
+  </form>
 </mat-card>
