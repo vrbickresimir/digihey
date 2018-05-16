@@ -1,3 +1,41 @@
-<p>
-  transformer works!
-</p>
+<mat-card style="width: 300px;">
+  <mat-card-header>
+    <mat-card-title>
+      Name:
+      <h3>{{transformer.name}}</h3>
+    </mat-card-title>
+    <mat-card-subtitle>Status: {{transformer.status}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item>
+        <h4 matLine>Vehicle group:</h4>
+        <p matLine>{{transformer.vehicleGroup}}</p>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <h4 matLine>Vehicle type:</h4>
+        <p matLine>{{transformer.vehicleType}}</p>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <h4 matLine>Vehicle model:</h4>
+        <p matLine>{{transformer.vehicleModel}}</p>
+      </mat-list-item>
+    </mat-list>
+    <mat-list>
+      <mat-list-item>
+        <h4>Gear:</h4>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item *ngFor="let gear of transformer.gear">
+        {{gear ? gear : '-'}}
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+  <mat-card-footer>
+    <mat-card-actions>
+      <button mat-raised-button color="primary">Edit</button>
+    </mat-card-actions>
+  </mat-card-footer>
+</mat-card>
