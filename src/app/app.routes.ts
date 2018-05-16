@@ -5,8 +5,7 @@ import { EditComponent } from './edit/edit.component';
 import { AppComponent } from './app.component';
 
 export const routes: Routes = [
-    {path: '', component: AppComponent},
     {path: 'preview', component: PreviewComponent},
-    {path: 'edit', component: EditComponent},
+    {path: 'edit/:id', component: EditComponent},
     {path: 'entry', component: EditComponent}
 ];
