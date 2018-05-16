@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 import {
   MatInputModule,
   MatSelectModule,
@@ -9,7 +10,8 @@ import {
   MatGridListModule,
   MatButtonModule,
   MatListModule,
-  MatDividerModule
+  MatDividerModule,
+  MatMenuModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -20,6 +22,7 @@ import { TransformerComponent } from './transformer/transformer.component';
 import { RouterModule } from '@angular/router';
 import { routes } from './app.routes';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,14 +31,15 @@ import { routes } from './app.routes';
     TransformerComponent
   ],
   imports: [
-    BrowserModule, BrowserAnimationsModule, FormsModule, ReactiveFormsModule, RouterModule.forRoot(routes),
+    BrowserModule, BrowserAnimationsModule, FormsModule, ReactiveFormsModule, RouterModule.forRoot(routes), HttpClientModule,
     MatInputModule,
     MatSelectModule,
     MatCardModule,
     MatGridListModule,
     MatButtonModule,
     MatListModule,
-    MatDividerModule
+    MatDividerModule,
+    MatMenuModule
   ],
   exports: [
     MatInputModule,
@@ -44,7 +48,8 @@ import { routes } from './app.routes';
     MatGridListModule,
     MatButtonModule,
     MatListModule,
-    MatDividerModule
+    MatDividerModule,
+    MatMenuModule
   ],
   providers: [AppService],
   bootstrap: [AppComponent]
