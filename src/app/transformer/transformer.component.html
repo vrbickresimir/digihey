@@ -4,7 +4,15 @@
       Name:
       <h3>{{transformer.name}}</h3>
     </mat-card-title>
-    <mat-card-subtitle>Status: {{transformer.status}}</mat-card-subtitle>
+    <mat-card-subtitle>
+      <form [formGroup]="statusForm" (ngSubmit)="saveStatus()">
+      <mat-select placeholder="Status" formControlName="status">
+        <mat-option value="OK">OK</mat-option>
+        <mat-option value="INJURED">INJURED</mat-option>
+        <mat-option value="MIA">MIA</mat-option>
+      </mat-select>
+    </form>
+    </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <mat-list>
@@ -35,7 +43,8 @@
   </mat-card-content>
   <mat-card-footer>
     <mat-card-actions>
-      <button mat-raised-button color="primary">Edit</button>
+      <button mat-raised-button color="primary" (click)="onSelect(transformer, transformer.id)" type="button">Edit</button>
+      <button mat-raised-button color="warn" (click)="saveStatus()" type="submit">Save status</button>
     </mat-card-actions>
   </mat-card-footer>
 </mat-card>
