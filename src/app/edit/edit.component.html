@@ -14,9 +14,11 @@
             </mat-form-field>
           </div>
           <div class="col-sm-6 p-1">
-            <mat-form-field>
-              <input matInput placeholder="Status" formControlName="status">
-            </mat-form-field>
+            <mat-select placeholder="Status" formControlName="status">
+              <mat-option value="OK">OK</mat-option>
+              <mat-option value="INJURED">INJURED</mat-option>
+              <mat-option value="MIA">MIA</mat-option>
+            </mat-select>
           </div>
         </div>
         <div class="row p-2">
