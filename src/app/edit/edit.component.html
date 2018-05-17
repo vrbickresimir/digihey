@@ -4,7 +4,7 @@
       Edit component
     </mat-card-title>
   </mat-card-header>
-  <form [formGroup]="transformerForm" (ngSubmit)="onSubmit()">
+  <form *ngIf="formReady" [formGroup]="transformerForm" (ngSubmit)="onSubmit()">
     <mat-card-content>
       <div class="container">
         <div class="row">

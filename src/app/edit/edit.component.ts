@@ -13,7 +13,9 @@ import { VehicleTypes } from '../models/vehicleTypes.class';
 })
 export class EditComponent implements OnInit {
 
+  id: number;
   transformerForm: FormGroup;
+  formReady: boolean = false;
   optionsArray: VehicleTypes[] = [];
   groupOptions = [];
   typeOptions = [];
@@ -22,8 +24,8 @@ export class EditComponent implements OnInit {
   constructor(private route: ActivatedRoute, public appService: AppService) { }
 
   ngOnInit() {
-    let id = this.route.snapshot.params['id'];
-    id ? this.updateForm(id) : this.initForm();
+    this.id = this.route.snapshot.params['id'];
+    this.id ? this.updateForm(this.id) : this.initForm();
     this.createUniqueSets();
   }
 
@@ -40,8 +42,12 @@ export class EditComponent implements OnInit {
 
   updateForm(index: number) {
     let gears = new FormArray([]);
+    let transformer: Transformer
 
-    this.appService.selectedItem.subscribe(transformer => {
+    this.appService.getTransformers().subscribe((transformers: Transformer[]) => {
+      transformer = transformers.find((transformer: Transformer) =>
+        transformer.id == index
+      );
 
       if (transformer.gear) {
         for (let gear of transformer.gear)
@@ -55,7 +61,10 @@ export class EditComponent implements OnInit {
         'vehicleModel': new FormControl(transformer.vehicleModel, Validators.required),
         'gears': gears
       });
-    })
+
+      this.formReady = !this.formReady;
+
+    });
   }
 
   addNewGear() {
@@ -119,4 +128,5 @@ export class EditComponent implements OnInit {
   onSubmit() {
     console.log('data: ', this.transformerForm);
   }
+
 }
