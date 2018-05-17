@@ -7,7 +7,7 @@
   <mat-card-content>
     <div class="row">
       <div class="col-md m-1" *ngFor="let transformer of transformers; let i = index">
-        <app-transformer [transformer]="transformer" (click)="onSelect(transformer, i)"></app-transformer>
+        <app-transformer [transformer]="transformer"></app-transformer>
       </div>
     </div>
   </mat-card-content>

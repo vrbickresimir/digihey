@@ -22,9 +22,4 @@ export class PreviewComponent implements OnInit {
     })
   }
 
-  onSelect(transformer: Transformer, index: number): void {
-    this.appService.selectedItem.next(transformer);
-    this.router.navigate(['edit', index]);
-  }
-
 }
