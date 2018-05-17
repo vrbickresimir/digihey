@@ -51,8 +51,8 @@ export class EditComponent implements OnInit {
         'name': new FormControl(transformer.name, Validators.required),
         'status': new FormControl(transformer.status, Validators.required),
         'vehicleGroup': new FormControl(transformer.vehicleGroup, Validators.required),
-        'vehicleType': new FormControl('', Validators.required),
-        'vehicleModel': new FormControl('', Validators.required),
+        'vehicleType': new FormControl(transformer.vehicleType, Validators.required),
+        'vehicleModel': new FormControl(transformer.vehicleModel, Validators.required),
         'gears': gears
       });
     })
