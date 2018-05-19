@@ -46,6 +46,9 @@
                   <input matInput placeholder="Gear" [formControlName]="i">
                 </mat-form-field>
               </div>
+              <div class="col-sm-4">
+                  <button mat-raised-button color="warn" type="button" (click)="deleteGear(i)">Delete gear</button>
+              </div>
             </div>
           </div>
         </div>
@@ -60,8 +63,7 @@
     <mat-card-actions>
       <div class="container">
         <button mat-raised-button color="primary" type="submit">Add</button>
-        <button mat-raised-button color="accent" type="button">Clear</button>
-        <button mat-raised-button color="warn" type="button">Delete</button>
+        <button mat-raised-button color="accent" type="button" (click)="clear()">Clear</button>
       </div>
     </mat-card-actions>
   </form>

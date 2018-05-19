@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray, Form } from '@angular/forms';
 
 import { AppService } from '../app.service';
 import { Transformer } from '../models/transformer.class';
 import { VehicleTypes } from '../models/vehicleTypes.class';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css']
 })
-export class EditComponent implements OnInit {
+export class EditComponent implements OnInit, OnDestroy {
 
   id: number;
   transformerForm: FormGroup;
@@ -20,6 +21,7 @@ export class EditComponent implements OnInit {
   groupOptions = [];
   typeOptions = [];
   modelOptions = [];
+  subscription: Subscription = new Subscription();
 
   constructor(private route: ActivatedRoute, public appService: AppService) { }
 
@@ -27,6 +29,9 @@ export class EditComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     this.id ? this.updateForm(this.id) : this.initForm();
     this.createUniqueSets();
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   initForm() {
@@ -38,13 +43,14 @@ export class EditComponent implements OnInit {
       'vehicleModel': new FormControl('', Validators.required),
       'gears': new FormArray([new FormControl()])
     });
+    this.formReady = !this.formReady;
   }
 
   updateForm(index: number) {
     let gears = new FormArray([]);
     let transformer: Transformer
 
-    this.appService.getTransformers().subscribe((transformers: Transformer[]) => {
+    this.subscription.add(this.appService.getTransformers().subscribe((transformers: Transformer[]) => {
       transformer = transformers.find((transformer: Transformer) =>
         transformer.id == index
       );
@@ -64,13 +70,17 @@ export class EditComponent implements OnInit {
 
       this.formReady = !this.formReady;
 
-    });
+    }));
   }
 
   addNewGear() {
     (<FormArray>this.transformerForm.get('gears')).push(
       new FormControl()
     );
+  }
+
+  deleteGear(index: number) {
+    (<FormArray>this.transformerForm.get('gears')).removeAt(index);
   }
 
   get gearControls() {
@@ -83,7 +93,7 @@ export class EditComponent implements OnInit {
     let type = [];
     let model = [];
 
-    this.appService.getOptions().subscribe(options => {
+    this.subscription.add(this.appService.getOptions().subscribe(options => {
 
       this.optionsArray = options;
 
@@ -96,7 +106,7 @@ export class EditComponent implements OnInit {
       this.groupOptions = Array.from(new Set(group));
       this.typeOptions = Array.from(new Set(type));
       this.modelOptions = Array.from(new Set(model));
-    })
+    }));
   }
 
   updateTypeOptions(option: string) {
@@ -110,6 +120,7 @@ export class EditComponent implements OnInit {
       type.push(obj.type);
     });
     this.typeOptions = Array.from(new Set(type));
+    this.transformerForm.get('vehicleModel').disable();
   }
 
   updateModelOptions(option: string) {
@@ -123,6 +134,11 @@ export class EditComponent implements OnInit {
       model.push(obj.model);
     });
     this.modelOptions = Array.from(new Set(model));
+    this.transformerForm.get('vehicleModel').enable();
+  }
+
+  clear() {
+    this.transformerForm.reset();
   }
 
   onSubmit() {
