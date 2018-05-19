@@ -13,3 +13,8 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 ## About the project
 
 This project is a simple transformer managment application. It uses both angular material and bootstrap. Bootstrap was used for its grid system and angular material was used for its easy to use components. It was build using Angular CLI.
+
+## Important for application usage
+
+Following repository has to be installed and up and running, or the application will probably break.
+https://github.com/DyslexicDcuk/transformers-api
