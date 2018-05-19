@@ -7,7 +7,7 @@
   <form *ngIf="formReady" [formGroup]="transformerForm" (ngSubmit)="onSubmit()">
     <mat-card-content>
       <div class="container">
-        <div class="row">
+        <div class="row p-2">
           <div class="col-sm-6 p-1">
             <mat-form-field>
               <input matInput placeholder="Name" formControlName="name">
@@ -29,39 +29,40 @@
           </div>
           <div class="col-sm-4 p-1">
             <mat-select placeholder="Vehicle type" formControlName="vehicleType">
-                <mat-option *ngFor="let option of typeOptions" [value]="option" (click)="updateModelOptions(option)">{{option}}</mat-option>
+              <mat-option *ngFor="let option of typeOptions" [value]="option" (click)="updateModelOptions(option)">{{option}}</mat-option>
             </mat-select>
           </div>
           <div class="col-sm-4 p-1">
-            <mat-select placeholder="Vehicle type" formControlName="vehicleModel">
-                <mat-option *ngFor="let option of modelOptions" [value]="option">{{option}}</mat-option>
+            <mat-select placeholder="Vehicle model" formControlName="vehicleModel">
+              <mat-option *ngFor="let option of modelOptions" [value]="option">{{option}}</mat-option>
             </mat-select>
           </div>
         </div>
-        <div class="row">
+        <div class="row p-2">
           <div class="col-sm-12" formArrayName="gears">
-              <div class="row p-2"
-              *ngFor="let gear of gearControls; let i = index;">
-                  <div class="col-sm-8">
-                      <mat-form-field>
-                          <input matInput placeholder="Gear" [formControlName]="i">
-                      </mat-form-field>
-                  </div>
-                </div>
+            <div class="row p-2" *ngFor="let gear of gearControls; let i = index;">
+              <div class="col-sm-8">
+                <mat-form-field>
+                  <input matInput placeholder="Gear" [formControlName]="i">
+                </mat-form-field>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="row">
+        <div class="row p-2">
           <div class="col-xs-12">
-              <button mat-raised-button color="primary" type="button" (click)="addNewGear()">Add new gear</button>
+            <button mat-raised-button color="primary" type="button" (click)="addNewGear()">Add new gear</button>
           </div>
         </div>
-
       </div>
+      <mat-divider></mat-divider>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit">Add</button>
-      <button mat-raised-button color="accent" type="button">Clear</button>
-      <button mat-raised-button color="warn" type="button">Delete</button>
+      <div class="container">
+        <button mat-raised-button color="primary" type="submit">Add</button>
+        <button mat-raised-button color="accent" type="button">Clear</button>
+        <button mat-raised-button color="warn" type="button">Delete</button>
+      </div>
     </mat-card-actions>
   </form>
 </mat-card>
