@@ -11,7 +11,8 @@ import {
   MatButtonModule,
   MatListModule,
   MatDividerModule,
-  MatMenuModule
+  MatMenuModule,
+  MatAutocompleteModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -39,7 +40,8 @@ import { routes } from './app.routes';
     MatButtonModule,
     MatListModule,
     MatDividerModule,
-    MatMenuModule
+    MatMenuModule,
+    MatAutocompleteModule
   ],
   exports: [
     MatInputModule,
@@ -49,7 +51,8 @@ import { routes } from './app.routes';
     MatButtonModule,
     MatListModule,
     MatDividerModule,
-    MatMenuModule
+    MatMenuModule,
+    MatAutocompleteModule
   ],
   providers: [AppService],
   bootstrap: [AppComponent]
