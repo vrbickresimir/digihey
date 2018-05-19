@@ -47,7 +47,7 @@
                 </mat-form-field>
               </div>
               <div class="col-sm-4">
-                  <button mat-raised-button color="warn" type="button" (click)="deleteGear(i)">Delete gear</button>
+                <button mat-raised-button color="warn" type="button" (click)="deleteGear(i)">Delete gear</button>
               </div>
             </div>
           </div>
@@ -62,8 +62,10 @@
     </mat-card-content>
     <mat-card-actions>
       <div class="container">
-        <button mat-raised-button color="primary" type="submit">Add</button>
-        <button mat-raised-button color="accent" type="button" (click)="clear()">Clear</button>
+        <div class="col-sm p-2">
+          <button mat-raised-button color="primary" type="submit">Add</button>
+          <button mat-raised-button color="accent" type="button" (click)="clear()">Clear</button>
+        </div>
       </div>
     </mat-card-actions>
   </form>

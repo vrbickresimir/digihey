@@ -11,7 +11,7 @@ export class Transformer {
     status: string;
 
     constructor(id: number, name: string, vehicle: Vehicle, status: string, gear?: string[]) {
-        
+
         this.id = id;
         this.name = name;
         this.vehicleGroup = vehicle.vehicleGroup;
