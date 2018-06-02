@@ -16,6 +16,7 @@ import { map, startWith } from 'rxjs/operators';
 export class PreviewComponent implements OnInit, OnDestroy {
 
   transformers: Transformer[];
+  filteredTransformers: Observable<Transformer[]>;
   subscription: Subscription = new Subscription();
   options: string[] = [];
   filterControl: FormControl = new FormControl();
@@ -37,6 +38,10 @@ export class PreviewComponent implements OnInit, OnDestroy {
         startWith(''),
         map(val => this.filter(val))
       );
+      this.filteredTransformers = this.filterControl.valueChanges.pipe(
+        startWith(''),
+        map(value => this.filter2(value))
+      )
     }));
   }
 
@@ -47,6 +52,10 @@ export class PreviewComponent implements OnInit, OnDestroy {
   filter(val: string): string[] {
     return this.options.filter(option =>
       option.toLowerCase().includes(val.toLowerCase()));
+  }
+  filter2(name: string): Transformer[] {
+    return this.transformers.filter( transformer => 
+      transformer.name.toLocaleLowerCase().includes(name.toLocaleLowerCase()));
   }
 
 }

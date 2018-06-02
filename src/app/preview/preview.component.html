@@ -16,7 +16,7 @@
   </mat-card-header>
   <mat-card-content>
     <div class="row">
-      <div class="col-md m-1" *ngFor="let transformer of transformers; let i = index">
+      <div class="col-md m-1" *ngFor="let transformer of filteredTransformers | async">
         <app-transformer [transformer]="transformer"></app-transformer>
       </div>
     </div>
