@@ -2,21 +2,25 @@
   <mat-card-header>
     <mat-card-title>
       <h2>Preview component</h2>
-      <form>
-        <mat-form-field>
-          <input type="text" placeholder="Search" matInput [formControl]="filterControl" [matAutocomplete]="auto">
-          <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-              {{ option }}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-      </form>
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <div class="row">
-      <div class="col-md m-1" *ngFor="let transformer of filteredTransformers | async">
+      <div class="col-sm-12 m-1">
+        <form>
+          <mat-form-field>
+            <input type="text" placeholder="Search transformers..." matInput [formControl]="filterControl" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option [value]="transformer.name" *ngFor="let transformer of filteredTransformers | async">
+                {{ transformer.name }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm m-1" *ngFor="let transformer of filteredTransformers | async">
         <app-transformer [transformer]="transformer"></app-transformer>
       </div>
     </div>
