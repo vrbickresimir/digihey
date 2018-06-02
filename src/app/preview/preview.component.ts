@@ -5,7 +5,7 @@ import { Transformer } from '../models/transformer.class';
 import { AppService } from '../app.service';
 import { Subscription } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
-import { map } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 
 
 @Component({
@@ -17,6 +17,9 @@ export class PreviewComponent implements OnInit, OnDestroy {
 
   transformers: Transformer[];
   subscription: Subscription = new Subscription();
+  options: string[] = [];
+  filterControl: FormControl = new FormControl();
+  filteredOptions: Observable<string[]>;
 
 
   constructor(public appService: AppService) { }
@@ -24,11 +27,27 @@ export class PreviewComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription.add(this.appService.getTransformers().subscribe(data => {
       this.transformers = data;
+    },null, () => {
+      this.transformers.forEach( transformer => {
+        console.log(transformer);
+        this.options.push(transformer.name);
+      })
+      this.filteredOptions = this.filterControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(val => this.filter(val))
+      );
     }));
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
+
+  filter(val: string): string[] {
+    return this.options.filter(option =>
+      option.toLowerCase().includes(val.toLowerCase()));
+  }
+
 }
 
